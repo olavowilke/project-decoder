@@ -1,0 +1,41 @@
+Planning the systems architecture
+	Points to observe:
+		Monolithic or microservices
+		Granularity of microservices
+			Related to the business complexity
+		Shared database or by Service
+		Communication between microservices
+			Synchronous communication via HTTP
+				API Composition Pattern
+			Asynchronous Communication via Messaging or Events
+				Broker Pattern
+				Mediator Pattern
+				Event Notification Pattern
+				Event Carried State Transfer Pattern
+				Saga Pattern
+		Cross Cutting Concerns	
+		Observability
+			Logs (elasticsearch as search engine)
+		Authentication and Authorization
+			Access Token Pattern
+
+DB compartilhado e DB por microserviço
+
+	Shared database
+		+ Strong consistency
+		+ ACID transactions locally
+			Atomicity, fully occurs or doesnt at all
+			Durability, at the end of the transactions, data will be persisted
+		- Strong coupling
+		- Impaired perfomance
+		- No data modeling isolation
+
+	Database per service
+		+ Loose coupling
+
+		CAP Theorem or Brewers Theorem
+			Balance between Consistency, Partitioning and Availability
+
+		Distributed Transactions
+
+		Data Compensation
