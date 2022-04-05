@@ -1,0 +1,12 @@
+package com.ead.authuser.service.impl;
+
+import com.ead.authuser.repository.UserRepository;
+import com.ead.authuser.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+}
