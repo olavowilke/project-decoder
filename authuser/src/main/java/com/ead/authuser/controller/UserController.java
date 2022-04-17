@@ -26,7 +26,6 @@ public class UserController {
                 .body(userService.findAll());
     }
 
-    //these verifications should be done within the service layer, as in the delete method
     @GetMapping("/{userId}")
     public ResponseEntity<Object> getUser(@PathVariable(value = "userId") UUID userId) {
         Optional<User> userOptional = userService.findById(userId);
@@ -36,16 +35,18 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId){
+    public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId) {
         Optional<User> userOptional = userService.findById(userId);
-        if (userOptional.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found")
-
+        if (userOptional.isEmpty()) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("User not found");
         } else {
-                userService.deleteUser(userOptional.get());
-
+            userService.deleteUser(userOptional.get());
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("User not found");
         }
     }
 
 }
-

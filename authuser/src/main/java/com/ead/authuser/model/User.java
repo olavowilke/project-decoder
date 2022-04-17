@@ -3,6 +3,7 @@ package com.ead.authuser.model;
 import com.ead.authuser.enums.UserStatus;
 import com.ead.authuser.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,29 +25,41 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String email;
+
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
+
     @Column(nullable = false)
     private String fullName;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
     @Column
     private String phoneNumber;
+
     @Column
     private String cpf;
+
     @Column
     private String imageUrl;
+
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
     private LocalDateTime creationDate;
+
     @Column(nullable = false)
     private LocalDateTime lastUpdateDate;
 

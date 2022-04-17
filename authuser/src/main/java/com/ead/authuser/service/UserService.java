@@ -15,4 +15,10 @@ public interface UserService {
 
     ResponseEntity<Object> deleteUser(User userOptional);
 
+    void save(User user);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
+
 }
