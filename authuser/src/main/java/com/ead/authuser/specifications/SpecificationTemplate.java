@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class SpecificationTemplate {
 
+    //@And will combine specifications to filter down the request
     @And({
             @Spec(path = "userType", spec = Equal.class),
             @Spec(path = "userStatus", spec = Equal.class),
@@ -18,5 +19,7 @@ public class SpecificationTemplate {
             @Spec(path = "cpf", spec = Like.class),
             @Spec(path = "fullName", spec = LikeIgnoreCase.class)
     })
-    public interface UserSpec extends Specification<UserModel> {}
+    public interface UserSpec extends Specification<UserModel> {
+    }
+
 }
