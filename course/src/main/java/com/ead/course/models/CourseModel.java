@@ -46,7 +46,6 @@ public class CourseModel implements Serializable {
     private CourseLevel courseLevel;
     @Column(nullable = false)
     private UUID userInstructor;
-
     /*
     Annotating the property with OneToMany and ManyToOne on both sides will ensure a bi-directional
     relationship.
@@ -64,7 +63,6 @@ public class CourseModel implements Serializable {
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     private Set<ModuleModel> modules;
-
     /*
     FetchMode.SELECT
         Runs individual sql queries to retrieve each module from the specific course.

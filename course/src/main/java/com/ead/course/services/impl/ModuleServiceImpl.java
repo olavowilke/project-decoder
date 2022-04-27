@@ -28,6 +28,7 @@ public class ModuleServiceImpl implements ModuleService {
     @Transactional
     @Override
     public void delete(ModuleModel moduleModel) {
+        //Cascade deletion implementation for modules table
         List<LessonModel> lessonModelList = lessonRepository.findAllLessonsIntoModule(moduleModel.getModuleId());
         if (!lessonModelList.isEmpty()){
             lessonRepository.deleteAll(lessonModelList);

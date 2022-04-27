@@ -30,14 +30,24 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     LessonRepository lessonRepository;
 
+    /*
+    @Transactional will execute the method on a single transaction, rolling back to its previous state
+    if some operation goes wrong.
+    Meaning that the database operation will only be effectively executed when no errors are encountered.
+     */
     @Transactional
     @Override
     public void delete(CourseModel courseModel) {
+        /*
+        This implementation will ensure a cascade deletion in tb_courses
+        It's preferable to implement the deletion then to use JPA annotations due to query performance
+        and database reliability.
+         */
         List<ModuleModel> moduleModelList = moduleRepository.findAllLModulesIntoCourse(courseModel.getCourseId());
-        if (!moduleModelList.isEmpty()){
-            for(ModuleModel module : moduleModelList){
+        if (!moduleModelList.isEmpty()) {
+            for (ModuleModel module : moduleModelList) {
                 List<LessonModel> lessonModelList = lessonRepository.findAllLessonsIntoModule(module.getModuleId());
-                if (!lessonModelList.isEmpty()){
+                if (!lessonModelList.isEmpty()) {
                     lessonRepository.deleteAll(lessonModelList);
                 }
             }
@@ -60,4 +70,5 @@ public class CourseServiceImpl implements CourseService {
     public Page<CourseModel> findAll(Specification<CourseModel> spec, Pageable pageable) {
         return courseRepository.findAll(spec, pageable);
     }
+
 }
