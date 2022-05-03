@@ -21,21 +21,29 @@ public class SpecificationTemplate {
             @Spec(path = "courseStatus", spec = Equal.class),
             @Spec(path = "name", spec = Like.class)
     })
-    public interface CourseSpec extends Specification<CourseModel> {}
-
-
-    @Spec(path = "title", spec = Like.class)
-    public interface ModuleSpec extends Specification<ModuleModel> {}
+    public interface CourseSpec extends Specification<CourseModel> {
+    }
 
     @Spec(path = "title", spec = Like.class)
-    public interface LessonSpec extends Specification<LessonModel> {}
+    public interface ModuleSpec extends Specification<ModuleModel> {
+    }
+
+    @Spec(path = "title", spec = Like.class)
+    public interface LessonSpec extends Specification<LessonModel> {
+    }
 
     public static Specification<ModuleModel> moduleCourseId(final UUID courseId) {
         return (root, query, cb) -> {
+            //distinct defines that there are no duplicate data
             query.distinct(true);
+            //entity A
             Root<ModuleModel> module = root;
+            //entity B
             Root<CourseModel> course = query.from(CourseModel.class);
+            //collection of entity A into entity B
             Expression<Collection<ModuleModel>> coursesModules = course.get("modules");
+            //implementing criteria builder with AND
+            //cb.isMember verifies which modules belong to this specific course
             return cb.and(cb.equal(course.get("courseId"), courseId), cb.isMember(module, coursesModules));
         };
     }
@@ -49,4 +57,5 @@ public class SpecificationTemplate {
             return cb.and(cb.equal(module.get("moduleId"), moduleId), cb.isMember(lesson, moduleLessons));
         };
     }
+
 }

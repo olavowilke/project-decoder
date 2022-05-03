@@ -12,6 +12,7 @@ import java.util.List;
 @Configuration
 public class ResolverConfig extends WebMvcConfigurationSupport {
 
+    //Resolver configuration for Pagination and Specification
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(new SpecificationArgumentResolver());
