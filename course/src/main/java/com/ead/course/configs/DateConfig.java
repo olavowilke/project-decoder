@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Primary;
 
 import java.time.format.DateTimeFormatter;
 
+//This class will implement Date configuration on a global level
 //@Configuration
 public class DateConfig {
 
     public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    //LocalDateTimeSerializer will allow jackson serializer to serialize the date on a custom defined Bean format
     public static LocalDateTimeSerializer LOCAL_DATETIME_SERIALIZER = new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
 
     @Bean

@@ -32,6 +32,7 @@ public class CourseModel implements Serializable {
     private String description;
     @Column
     private String imageUrl;
+    //Date formatting on attribute level
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     @Column(nullable = false)
     private LocalDateTime creationDate;
