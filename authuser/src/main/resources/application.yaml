@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url:  jdbc:postgresql://localhost:5432/ead-authuser
+    url: jdbc:postgresql://localhost:5432/ead-authuser
     username: postgres
     password: banco123
   jpa:
@@ -15,14 +15,16 @@ spring:
     properties:
       hibernate:
         show_sql: true
+# this property will allow windows consoles to have ANSI standard colors
   output:
     ansi:
       enabled: Always
 
-
+#Logging level configuration
 logging:
   level:
     com.ead: TRACE
     root: INFO
     org.springframework.web: DEBUG
     org.hibernate: INFO
+#    more granular logs will have priority

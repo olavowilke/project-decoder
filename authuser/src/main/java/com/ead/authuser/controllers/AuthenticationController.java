@@ -28,13 +28,13 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@RequestBody @Validated(UserDto.UserView.RegistrationPost.class)
-                                                   @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto){
+                                               @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
         log.debug("POST registerUser userDto received {} ", userDto.toString());
-        if(userService.existsByUsername(userDto.getUsername())){
+        if (userService.existsByUsername(userDto.getUsername())) {
             log.warn("Username {} is Already Taken ", userDto.getUsername());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Username is Already Taken!");
         }
-        if(userService.existsByEmail(userDto.getEmail())){
+        if (userService.existsByEmail(userDto.getEmail())) {
             log.warn("Email {} is Already Taken ", userDto.getEmail());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Email is Already Taken!");
         }
@@ -47,11 +47,18 @@ public class AuthenticationController {
         userService.save(userModel);
         log.debug("POST registerUser userModel saved {} ", userModel.toString());
         log.info("User saved successfully userId {} ", userModel.getUserId());
-        return  ResponseEntity.status(HttpStatus.CREATED).body(userModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
     }
 
+    /*
+    Logging leven can be defined via maven command line
+    Enabling trace loggin:
+    mvn springboot:run -Dspring-boot.run.arguments=--logging.level.com.ead=TRACE
+
+    This configuration can also be applied via application.yaml
+     */
     @GetMapping("/")
-    public String index(){
+    public String index() {
         log.trace("TRACE");
         log.debug("DEBUG");
         log.info("INFO");
