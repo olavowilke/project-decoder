@@ -19,7 +19,5 @@ public class SpecificationTemplate {
             @Spec(path = "cpf", spec = Like.class),
             @Spec(path = "fullName", spec = LikeIgnoreCase.class)
     })
-    public interface UserSpec extends Specification<UserModel> {
-    }
-
+    public interface UserSpec extends Specification<UserModel> {}
 }
