@@ -15,16 +15,20 @@ spring:
     properties:
       hibernate:
         show_sql: true
-# this property will allow windows consoles to have ANSI standard colors
+  # this property will allow windows consoles to have ANSI standard colors
   output:
     ansi:
       enabled: Always
 
-#Logging level configuration
+# Logging level configuration
+# most granular logs will have priority
 logging:
   level:
     com.ead: TRACE
     root: INFO
     org.springframework.web: DEBUG
     org.hibernate: INFO
-#    more granular logs will have priority
+ead:
+  api:
+    url:
+      course: 'http://localhost:8082'

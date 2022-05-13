@@ -18,6 +18,7 @@ public class ResolverConfig extends WebMvcConfigurationSupport {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         //Argument resolver for specification
         argumentResolvers.add(new SpecificationArgumentResolver());
+
         PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
         //Argument resolver for pagination
         argumentResolvers.add(resolver);

@@ -28,13 +28,13 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@RequestBody @Validated(UserDto.UserView.RegistrationPost.class)
-                                               @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
+                                                   @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto){
         log.debug("POST registerUser userDto received {} ", userDto.toString());
-        if (userService.existsByUsername(userDto.getUsername())) {
+        if(userService.existsByUsername(userDto.getUsername())){
             log.warn("Username {} is Already Taken ", userDto.getUsername());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Username is Already Taken!");
         }
-        if (userService.existsByEmail(userDto.getEmail())) {
+        if(userService.existsByEmail(userDto.getEmail())){
             log.warn("Email {} is Already Taken ", userDto.getEmail());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Email is Already Taken!");
         }
@@ -45,9 +45,9 @@ public class AuthenticationController {
         userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         userService.save(userModel);
-        log.debug("POST registerUser userModel saved {} ", userModel.toString());
+        log.debug("POST registerUser userId saved {} ", userModel.getUserId());
         log.info("User saved successfully userId {} ", userModel.getUserId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(userModel);
     }
 
     /*
@@ -58,7 +58,7 @@ public class AuthenticationController {
     This configuration can also be applied via application.yaml
      */
     @GetMapping("/")
-    public String index() {
+    public String index(){
         log.trace("TRACE");
         log.debug("DEBUG");
         log.info("INFO");
