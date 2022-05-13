@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
+/*
+This implementation is a way of creating an association reference of resources between  microservices,
+instead of replicating every resource and having to deal with consistency problems in different databases.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
